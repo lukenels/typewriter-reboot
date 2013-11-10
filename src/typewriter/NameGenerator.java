@@ -52,6 +52,32 @@ public class NameGenerator {
 			return front+back;
 			}
 	}
+		public static String getBuildingName() {
+
+		Random rd = new Random();
+		String[] buildingName1 = new String[9];
+		buildingName1[0] = "Perkin_";
+		buildingName1[1] = "Mendern_";
+		buildingName1[2] = "Kimbern_";
+		buildingName1[3] = "Stocklen_";
+		buildingName1[4] = "Jenfer_";
+		buildingName1[5] = "Darmon_";
+		buildingName1[6] = "Neal_";
+		buildingName1[7] = "Harvens_";
+		buildingName1[8] = "Owin_";
+
+
+		String[] buildingName2 = new String[5];
+		buildingName2[0] = "Bank";
+		buildingName2[1] = "Offiecs";
+		buildingName2[2] = "Apartments";
+		buildingName2[3] = "Mills";
+		buildingName2[4] = "General_Store";
+
+
+			String front = buildingName1[rd.nextInt(9)];
+			String back = buildingName3[rd.nextInt(5)];
+			return front+back;
 }
 
 
