@@ -62,7 +62,7 @@ public class World {
 		switch(command[0]) {
 
 			case "help":
-				return "Possible commands are [goto, whereami, pathsfromhere, whatishere, drop, pickup]";
+				return "Possible commands are [goto, whereami, pathsfromhere, whatishere, drop, pickup, examine]";
 
 			case "goto": 
 				if(command.length == 1) throw new IllegalArgumentException();
@@ -72,6 +72,7 @@ public class World {
 						return "You Walked to " + l.name;
 					}
 				}
+				return command[1] + " was not found.";
 
 
 
