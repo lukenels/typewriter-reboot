@@ -58,6 +58,7 @@ public class World {
 
 	public String processCommand(String[] command) {
 		if(command.length==0) throw new IllegalArgumentException();
+
 		switch(command[0]) {
 
 			case "help":
@@ -86,31 +87,49 @@ public class World {
 			case "inventory":
 				return player.inventory.toString();
 
-			case "drop":
+			case "examine":
 				if(command.length == 1) throw new IllegalArgumentException();
-				Iterator<Prop> iterr = player.inventory.iterator();
-				while(iterr.hasNext()) {
-					Prop p = iterr.next();
+				for(Prop p : player.location.props) {
 					if(p.name.equals(command[1])) {
-						player.location.props.add(p);
-						iterr.remove();
-						return "You dropped "+command[1];
+						return p.getDesc();
 					}
 				}
-				return "You do not have "+command[1];
+				for(Prop p : player.inventory) {
+					if(p.name.equals(command[1])) {
+						return p.getDesc();
+					}
+				}
+				return command[1]+" was not found.";
+
+			case "drop":
+				if(command.length == 1) throw new IllegalArgumentException();
+				{
+					Iterator<Prop> iterr = player.inventory.iterator();
+					while(iterr.hasNext()) {
+						Prop p = iterr.next();
+						if(p.name.equals(command[1])) {
+							player.location.props.add(p);
+							iterr.remove();
+							return "You dropped "+command[1];
+						}
+					}
+					return "You do not have "+command[1];
+				}
 
 			case "pickup":
 				if(command.length == 1) throw new IllegalArgumentException();
-				Iterator<Prop> itr = player.location.props.iterator();
-				while(itr.hasNext()) {
-					Prop p = itr.next();
-					if(p.name.equals(command[1])) {
-						player.inventory.add(p);
-						itr.remove();
-						return "You picked up "+command[1];
+				{
+					Iterator<Prop> itr = player.location.props.iterator();
+					while(itr.hasNext()) {
+						Prop p = itr.next();
+						if(p.name.equals(command[1])) {
+							player.inventory.add(p);
+							itr.remove();
+							return "You picked up "+command[1];
+						}
 					}
+					return command[1]+" was not found here.";
 				}
-				return command[1]+" was not found here.";
 		}
 
 		throw new IllegalArgumentException();
