@@ -2,6 +2,8 @@ package typewriter;
 import java.util.*;
 public class Player {
 	
+	
+
 	Location location;
 
 	Set<Prop> inventory;

@@ -10,7 +10,14 @@ public class World {
 
 	Player player;
 
+
+	Set<Actor> actors;
+
+
 	public World() {
+
+
+
 		player = new Player();
 		
 		
@@ -18,17 +25,24 @@ public class World {
 		player.location = hub;
 		hub.name = "mainstreet";
 		generateLocations(hub, 1);
+		for(Actor a : actors) {
+			a.setUpFeelings(actors);
+		}
 		reflexifyLocations(hub);
 
 	}
 
 	public void generateLocations(Location hub, int level) {
+
+		Random rd = new Random();
+
+		if(rd.nextInt(2) == 0) actors.add(new Actor()); 
+
 		Set<Location> locations = new HashSet<Location>();
 		locations.add(new Location());
 		locations.add(new Location());
 		locations.add(new Location());
 		for(Location l : locations) {
-			Random rd = new Random();
 
 
 			if(rd.nextInt(level) == 0) {
@@ -43,6 +57,14 @@ public class World {
 		}
 
 		hub.accessible = locations;
+	}
+
+	public Set<Actor> actorsInLocation(Location l) {
+		Set<Actor> result = new HashSet<Actor>();
+		for(Actor a : actors) {
+			if(a.location == l) result.add(a);
+		}
+		return result;
 	}
 
 	public void reflexifyLocations(Location hub) {
@@ -76,8 +98,27 @@ public class World {
 
 
 
+			case "peoplehere":
+				return actorsInLocation(player.location).toString();
+
+
 			case "whereami":
 				return player.location.name;
+
+			case "ask":
+				if(command.length <= 2) throw new IllegalArgumentException();
+				for (Actor a : actorsInLocation(player.location)) {
+					if(a.name.equals(command[1])) {
+						for(Actor b : actors) {
+							if(b.name.equals(command[2])) {
+								return a.getRelationship(b);
+							}
+						}
+						return command[2]+" does not exist";
+					}
+				}
+				return command[1]+" not found here.";
+
 
 			case "pathsfromhere":
 				return player.location.accessible.toString();
