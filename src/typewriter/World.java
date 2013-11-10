@@ -34,10 +34,12 @@ public class World {
 			if(rd.nextInt(level) == 0) {
 
 				generateLocations(l, level+1);
+				l.name = NameGenerator.getStreetName();
 			} else {
 				l.accessible = new HashSet<Location>();
+				l.name = ""+rd.nextInt(99999);
 			}
-			l.name = ""+rd.nextInt(99999);
+			
 		}
 
 		hub.accessible = locations;
@@ -111,7 +113,7 @@ public class World {
 				return command[1]+" was not found here.";
 		}
 
-		return "";
+		throw new IllegalArgumentException();
 	}
 
 }

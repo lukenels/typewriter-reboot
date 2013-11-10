@@ -1,48 +1,49 @@
+package typewriter;
 import java.util.Random;
 public class NameGenerator {
 	
-	public static String getStreetName() {}
+	public static String getStreetName() {
 
 
-		String[] streetNames1 = new String[9];
-		streetnames1[0] = "101st ";
-		streetnames1[1] = "92nd ";
-		streetnames1[2] = "63rd ";
-		streetnames1[3] = "414th ";
-		streetnames1[4] = "231st ";
-		streetnames1[5] = "12nd ";
-		streetnames1[6] = "303rd ";
-		streetnames1[7] = "458th ";
-		streetnames1[8] = "37th";
+		String[] streetnames1 = new String[9];
+		streetnames1[0] = "101st_";
+		streetnames1[1] = "92nd_";
+		streetnames1[2] = "63rd_";
+		streetnames1[3] = "414th_";
+		streetnames1[4] = "231st_";
+		streetnames1[5] = "12nd_";
+		streetnames1[6] = "303rd_";
+		streetnames1[7] = "458th_";
+		streetnames1[8] = "37th_";
 
 
-		String[] streetNames2 = new String[9];
-		streetnames2[0] = "Parkton ";
-		streetnames2[1] = "Berryhill ";
-		streetnames2[2] = "Marbury ";
-		streetnames2[3] = "Stirling ";
-		streetnames2[4] = "Ferris ";
-		streetnames2[5] = "Darton ";
-		streetnames2[6] = "Milbern ";
-		streetnames2[7] = "Forest ";
-		streetnames2[8] = "Pine ";
+		String[] streetnames2 = new String[9];
+		streetnames2[0] = "Parkton_";
+		streetnames2[1] = "Berryhill_";
+		streetnames2[2] = "Marbury_";
+		streetnames2[3] = "Stirling_";
+		streetnames2[4] = "Ferris_";
+		streetnames2[5] = "Darton_";
+		streetnames2[6] = "Milbern_";
+		streetnames2[7] = "Forest_";
+		streetnames2[8] = "Pine_";
 
 
-		String[] streetNames3 = new String[2];
+		String[] streetnames3 = new String[2];
 		streetnames3[0] = "Avenue";
 		streetnames3[1] = "Street";
 
 
-		String[] streetNames4 = new String[4];
-		streetnanes4[0] = "Cove";
-		streetnanes4[1] = "Ridge";
-		streetnanes4[2] = "Road";
-		streetnanes4[3] = "Heights";
+		String[] streetnames4 = new String[4];
+		streetnames4[0] = "Cove";
+		streetnames4[1] = "Ridge";
+		streetnames4[2] = "Road";
+		streetnames4[3] = "Heights";
 
 		Random rd = new Random();
 
 		if(rd.nextInt(2) == 0) {
-			String front = streetNames1[rd.nextInt(9)];
+			String front = streetnames1[rd.nextInt(9)];
 			String back = streetnames3[rd.nextInt(2)];
 			return front+back;
 		} else {
@@ -50,11 +51,9 @@ public class NameGenerator {
 			String back = streetnames4[rd.nextInt(4)];
 			return front+back;
 			}
-
-
-		}
 	}
 }
+
 
 
 

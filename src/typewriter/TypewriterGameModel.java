@@ -18,7 +18,11 @@ public class TypewriterGameModel {
 
 		}
 
-		buffer = world.processCommand(text.split(" "));
+		try {
+			buffer = world.processCommand(text.split(" "));
+		} catch (IllegalArgumentException exc) {
+			buffer = "Command not recognized. Please try again.";
+		}
 
 
 	}
