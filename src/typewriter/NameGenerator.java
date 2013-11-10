@@ -71,7 +71,7 @@ public class NameGenerator {
 
 		String[] buildingName2 = new String[5];
 		buildingName2[0] = "Bank";
-		buildingName2[1] = "Offiecs";
+		buildingName2[1] = "Offices";
 		buildingName2[2] = "Apartments";
 		buildingName2[3] = "Mills";
 		buildingName2[4] = "General_Store";
