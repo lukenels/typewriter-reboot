@@ -37,7 +37,7 @@ public class World {
 				l.name = NameGenerator.getStreetName();
 			} else {
 				l.accessible = new HashSet<Location>();
-				l.name = ""+rd.nextInt(99999);
+				l.name = NameGenerator.getBuildingName();
 			}
 			
 		}

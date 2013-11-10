@@ -52,6 +52,8 @@ public class NameGenerator {
 			return front+back;
 			}
 	}
+
+
 		public static String getBuildingName() {
 
 		Random rd = new Random();
@@ -76,9 +78,11 @@ public class NameGenerator {
 
 
 			String front = buildingName1[rd.nextInt(9)];
-			String back = buildingName3[rd.nextInt(5)];
+			String back = buildingName2[rd.nextInt(5)];
 			return front+back;
-}
+
+		}
+	}
 
 
 
