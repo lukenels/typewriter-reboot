@@ -1,0 +1,1 @@
+javac -d "bin" -cp "lib\lwjgl-2.9.0\jar\*" src\typewriter\*.java

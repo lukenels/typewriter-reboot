@@ -1,0 +1,1 @@
+java -cp "./bin:./lib/lwjgl-2.9.0/jar/*" -Djava.library.path="./lib/lwjgl-2.9.0/native/macosx" typewriter.TypewriterController

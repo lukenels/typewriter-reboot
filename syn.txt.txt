@@ -1,0 +1,11 @@
+kill: murder, assassinate, slay, execute, slaughter, annihilate, dispatch, kill
+examine: look at, inspect, appraise, scan, survey, view, inspect, examine, scrutinize
+search: investigate, search
+go: travel, go
+dial: call, dial, ring, phone
+exit: exit, depart, leave, go out, egress, vacate
+enter: enter, go in, go inside
+shoot: shoot, blast
+use: use, handle, operate, utilize, wield
+ask: inquire, ask, demand, interrogate, implore, beseech
+show: show, display
