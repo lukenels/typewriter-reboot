@@ -40,7 +40,7 @@ public strictfp class LetterGrid {
 		if(cursorx == 64) moveUp();
 		data[cursory][cursorx] = new LetterBlock(letters, c);
 		cursorx++;
-		System.out.println(c);
+		//System.out.println(c);
 	}
 
 	public boolean deleteCharacter() {

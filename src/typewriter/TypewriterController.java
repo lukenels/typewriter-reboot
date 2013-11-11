@@ -1,3 +1,4 @@
+
 package typewriter;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -13,9 +14,9 @@ public class TypewriterController {
 	private Queue<TypewriterEvent> queue;
 
 	public static void main(String[] args) throws Exception {
-		 TypewriterController c = new TypewriterController();
-		 while(true) c.update();
-
+		  TypewriterController c = new TypewriterController();
+		  while(true) c.update();
+		
 		// TypeStream s = new TypeStream();
 		// System.setOut(s);
 
@@ -27,6 +28,7 @@ public class TypewriterController {
 		// }
 
 		// while(true) s.update();
+		
 	}
 
 	public TypewriterController() {
@@ -38,48 +40,62 @@ public class TypewriterController {
 	}
 
 	private String inputBuffer = "";
+	private String outputBuffer = "";
 
 	private boolean inputMode = true;
 
+	private boolean firstTurn = true;
 
-	
+
+	int bsQuota = 0;
 
 
 
 	public void update() {
 
 		boolean ready = view.update();
-
-		if(inputMode) {
+		if (firstTurn) {
+			inputMode = false;
+			firstTurn = false;
+			model.processLine("");
+		}
+		if(inputMode && !model.world.gameEnded) {
 			while(Keyboard.next() && Keyboard.getEventKeyState()) {
 				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN) {
 					inputMode = false;
+					System.out.println(inputBuffer);
 					model.processLine(inputBuffer);
 					queue.add(new TypewriterEvent(TypewriterEvent.Type.NEW_LINE));
 					break;
-				} else if (Keyboard.getEventKey() == Keyboard.KEY_BACK) {
-					if (inputBuffer.length() != 0) {
-						inputBuffer = inputBuffer.substring(0,inputBuffer.length()-1);
-					}
+				} else if (Keyboard.getEventKey() == Keyboard.KEY_BACK && bsQuota > 0) {
+					bsQuota = Math.max(bsQuota-1, 0);
+					inputBuffer = inputBuffer.substring(0,inputBuffer.length()-1);
 					queue.add(new TypewriterEvent(TypewriterEvent.Type.DELETE_CHAR));
 				} else if ((int)Keyboard.getEventCharacter() >= 32 && (int)Keyboard.getEventCharacter() <= 126){
 					inputBuffer += Keyboard.getEventCharacter();
 					queue.add(new TypewriterEvent(TypewriterEvent.Type.PRINT_CHAR, Keyboard.getEventCharacter()));
+					bsQuota++;
 				}
 			}
 		}
 
 		if(!inputMode) {
-
-			inputBuffer = model.getText();
-
-			for(char c : inputBuffer.toCharArray()) {
-				queue.add(new TypewriterEvent(TypewriterEvent.Type.PRINT_CHAR, c));
-			}
-			queue.add(new TypewriterEvent(TypewriterEvent.Type.NEW_LINE));
 			inputBuffer = "";
 
+			outputBuffer = model.getText();
+
+			for(char c : outputBuffer.toCharArray()) {
+				if(c != '\n') {
+					queue.add(new TypewriterEvent(TypewriterEvent.Type.PRINT_CHAR, c));
+				} else {
+					queue.add(new TypewriterEvent(TypewriterEvent.Type.NEW_LINE));
+				}
+			}
+			//queue.add(new TypewriterEvent(TypewriterEvent.Type.NEW_LINE));
+			outputBuffer = "";
+
 			inputMode = true;
+			bsQuota = 0;
 		}
 
 		if(ready) {

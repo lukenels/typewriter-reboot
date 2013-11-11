@@ -19,9 +19,15 @@ public class TypewriterGameModel {
 		}
 
 		try {
-			buffer = world.processCommand(text.split(" "));
+			String[] splitCommand = text.split(" ");
+			String command = splitCommand[0];
+			String params = "";
+			for (int i = 1; i < splitCommand.length; i++)
+				params += splitCommand[i]+" ";
+			params = params.trim();
+			buffer = world.processCommand(command, params);
 		} catch (IllegalArgumentException exc) {
-			buffer = "Command not recognized. Please try again.";
+			exc.printStackTrace();
 		}
 
 

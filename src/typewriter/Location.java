@@ -12,9 +12,7 @@ public class Location {
 		props = new HashSet<Prop>();
 		Random rd = new Random();
 		while(rd.nextInt(2) != 0) {
-			Prop p = new Prop();
-			p.name = "Prop_" + rd.nextInt(99999);
-			props.add(p);
+			props.add(new Prop());
 		}
 	}
 
